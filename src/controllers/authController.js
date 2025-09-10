@@ -1,20 +1,16 @@
-const User = require('../models/User')
+const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const registerController = async (name, userName, email, password, role) => {
-
   const hashedPass = await bcrypt.hash(password, 10);
-
   const newUser = User({ name, userName, email, password: hashedPass, role });
-
-  await newUser.save()
-
+  await newUser.save();
   return newUser;
 };
 
 const loginController = async (email, password) => {
-  const user = await User.findOne({email});
+  const user = await User.findOne({ email });
   if (!user) {
     throw new Error("Usuario no encontrado");
   }

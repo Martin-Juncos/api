@@ -1,4 +1,4 @@
-const User = require('../models/User')
+const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
 const createUserController = async (name, userName, email, password, role) => {
@@ -13,11 +13,11 @@ const createUserController = async (name, userName, email, password, role) => {
 const getAllUsersController = async () => {
   const allUsers = await User.find({});
   if (!allUsers.length) throw new Error();
-  return allUsers 
+  return allUsers;
 };
 
 const getUserByNameController = async (name) => {
-  const userByName = await User.find({name});
+  const userByName = await User.find({ name });
   if (!userByName.length) throw new Error();
   return userByName;
 };
@@ -33,11 +33,17 @@ const deleteUserController = async (id) => {
   return deleteUser;
 };
 
-const updeateUserController = async (id, name, userName, email, password, role) => {
-
+const updeateUserController = async (
+  id,
+  name,
+  userName,
+  email,
+  password,
+  role
+) => {
   const newUserData = { name, userName, email, password, role };
 
-  const user = await User.findByIdAndUpdate(id, newUserData, {new: true});
+  const user = await User.findByIdAndUpdate(id, newUserData, { new: true });
 
   return user;
 };
